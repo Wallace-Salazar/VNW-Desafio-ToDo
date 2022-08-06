@@ -30,8 +30,8 @@ body{
 }
 `;
 const Title = styled.h1`
-   font-family: "Times New Roman", Times, serif;
-   text-shadow: 2px 2px #ff0000;
+  font-family: "Times New Roman", Times, serif;
+  text-shadow: 2px 2px #ff0000;
 `;
 const Criar = styled.button`
   width: 50px;
@@ -40,7 +40,7 @@ const Criar = styled.button`
   background-color: indigo;
   border-color: orangered;
   border-radius: 5px;
-  color:white;
+  color: white;
   :hover {
     cursor: pointer;
     color: red;
@@ -71,9 +71,9 @@ const Tarefa = styled.li`
 const Icon = styled.button`
   width: 20px;
   height: 20px;
-  margin-left:10px;
+  margin-left: 10px;
   text-align: center;
-  align-items:center;
+  align-items: center;
   border: 1px solid transparent;
   border-radius: 25%;
   background-color: #f72585;
@@ -108,6 +108,14 @@ export default class toDo extends React.Component {
       })
     });
   };
+  removeall = (id) => {
+    let { taskList } = this.state;
+    this.setState({
+      taskList: taskList.filter((item) => {
+        return item.id === id;
+      })
+    });
+  };
   render() {
     return (
       <form onSubmit={(event) => event.preventDefault()}>
@@ -115,6 +123,7 @@ export default class toDo extends React.Component {
         <Title>To Do</Title>
         <input onChange={this.handleChange} value={this.state.task} />
         <Criar onClick={this.add}>ADD</Criar>
+        <Criar onClick={this.removeall}>CLEAR</Criar>
         <Lista>
           {this.state.taskList.map((item) => (
             <Tarefa>
